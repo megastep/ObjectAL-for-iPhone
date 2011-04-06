@@ -71,7 +71,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALSimpleAudio);
 
 + (OALSimpleAudio*) sharedInstanceWithSources:(int) sources
 {
-	return [[[self alloc] initWithSources:sources] autorelease];
+	@synchronized(self)
+	{
+		if(nil == _OALSimpleAudio_sharedInstance)
+		{
+			_OALSimpleAudio_sharedInstance = [[self alloc] initWithSources:sources];
+		}
+	}
+	return (OALSimpleAudio*) _OALSimpleAudio_sharedInstance;
 }
 
 - (id) init
