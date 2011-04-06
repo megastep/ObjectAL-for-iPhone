@@ -185,6 +185,8 @@
 /** If YES, the sound system is suspended. */
 @property(readonly) bool suspended;
 
+/** All sources managed by the pool (id<ALSoundSource>). */
+@property(readonly) NSArray* sources;
 
 
 #pragma mark Object Management
@@ -405,6 +407,24 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(OALSimpleAudio);
 						   pan:(float) pan
 						  loop:(bool) loop;
 
+/** Play a sound effect on a specified source. The sound will be loaded and cached if it wasn't already.
+ *
+ * @param filePath The path containing the sound data.
+ * @param source The sound source to use for playback.
+ * @param volume The volume (gain) to play at (0.0 - 1.0).
+ * @param pitch The pitch to play at (1.0 = normal pitch).
+ * @param pan Left-right panning (-1.0 = far left, 1.0 = far right).
+ * @param loop If TRUE, the sound will loop until you call "stop" on the returned sound source.
+ * @return The sound source being used for playback, or nil if an error occurred (You'll need to
+ *         keep this if you want to be able to stop a looped playback).
+ */
+- (id<ALSoundSource>) playEffect:(NSString*) filePath
+                          source:(id<ALSoundSource>) source
+						  volume:(float) volume
+						   pitch:(float) pitch
+							 pan:(float) pan
+							loop:(bool) loop;
+
 /** Play a sound effect from a user-supplied buffer.
  *
  * @param buffer The buffer containing the sound data.
@@ -416,6 +436,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(OALSimpleAudio);
  *         keep this if you want to be able to stop a looped playback).
  */
 - (id<ALSoundSource>) playBuffer:(ALBuffer*) buffer
+						  volume:(float) volume
+						   pitch:(float) pitch
+							 pan:(float) pan
+							loop:(bool) loop;
+
+
+/** Play a sound effect from a user-supplied buffer, on a specified source.
+ *
+ * @param buffer The buffer containing the sound data.
+ * @param source The sound source to use for playback.
+ * @param volume The volume (gain) to play at (0.0 - 1.0).
+ * @param pitch The pitch to play at (1.0 = normal pitch).
+ * @param pan Left-right panning (-1.0 = far left, 1.0 = far right).
+ * @param loop If TRUE, the sound will loop until you call "stop" on the returned sound source.
+ * @return The sound source being used for playback, or nil if an error occurred (You'll need to
+ *         keep this if you want to be able to stop a looped playback).
+ */
+- (id<ALSoundSource>) playBuffer:(ALBuffer*) buffer
+                          source:(id<ALSoundSource>) source
 						  volume:(float) volume
 						   pitch:(float) pitch
 							 pan:(float) pan

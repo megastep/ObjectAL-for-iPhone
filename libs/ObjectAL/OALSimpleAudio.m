@@ -110,6 +110,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALSimpleAudio);
 	return self;
 }
 
+- (NSArray *) sources {
+    return channel.sourcePool.sources;
+}
+
 - (void) dealloc
 {
 	OAL_LOG_DEBUG(@"%@: Dealloc", self);
@@ -637,6 +641,26 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALSimpleAudio);
 	return nil;
 }
 
+- (id<ALSoundSource>) playEffect:(NSString*) filePath
+                          source:(id<ALSoundSource>) source
+						  volume:(float) volume
+						   pitch:(float) pitch
+							 pan:(float) pan
+							loop:(bool) loop
+{
+	if(nil == filePath)
+	{
+		OAL_LOG_ERROR(@"filePath was NULL");
+		return nil;
+	}
+	ALBuffer* buffer = [self internalPreloadEffect:filePath reduceToMono:NO];
+	if(nil != buffer)
+	{
+		return [source play:buffer gain:volume pitch:pitch pan:pan loop:loop];
+	}
+	return nil;
+}
+
 - (id<ALSoundSource>) playBuffer:(ALBuffer*) buffer
 						  volume:(float) volume
 						   pitch:(float) pitch
@@ -649,6 +673,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALSimpleAudio);
 		return nil;
 	}
 	return [channel play:buffer gain:volume pitch:pitch pan:pan loop:loop];
+}
+
+- (id<ALSoundSource>) playBuffer:(ALBuffer*) buffer
+                          source:(id<ALSoundSource>) source
+						  volume:(float) volume
+						   pitch:(float) pitch
+							 pan:(float) pan
+							loop:(bool) loop
+{
+  	if(nil == buffer)
+	{
+		OAL_LOG_ERROR(@"buffer was NULL");
+		return nil;
+	}
+	return [source play:buffer gain:volume pitch:pitch pan:pan loop:loop];  
 }
 
 - (void) stopAllEffects
