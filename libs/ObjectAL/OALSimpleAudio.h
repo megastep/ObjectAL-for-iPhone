@@ -423,6 +423,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_HEADER(OALSimpleAudio);
 
 #pragma mark Utility
 
+/** Vibrate the device (does nothing on iPod touch)
+ */
+- (void) vibrate;
+
 /** Stop all effects and bg music.
  */
 - (void) stopEverything;

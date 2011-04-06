@@ -29,6 +29,8 @@
 #import "OALAudioSession.h"
 #import "OpenALManager.h"
 
+#import <AudioToolbox/AudioToolbox.h>
+
 // By default, reserve all 32 sources.
 #define kDefaultReservedSources 32
 
@@ -645,6 +647,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALSimpleAudio);
 
 
 #pragma mark Utility
+
+- (void) vibrate 
+{
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+}
 
 - (void) stopEverything
 {
