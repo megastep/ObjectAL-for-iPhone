@@ -178,6 +178,8 @@
 		va_end(args);
 		OAL_LOG_ERROR_CONTEXT(function, @"%@ (error code 0x%08x: %@)", description, errorCode, errorString);
 		[description release];
+#else
+        (void)errorString;
 #endif /* OBJECTAL_CFG_LOG_LEVEL > 0 */
 		
 		if(postNotification)
