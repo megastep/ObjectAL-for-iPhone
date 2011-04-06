@@ -97,7 +97,7 @@
 
 #pragma mark Setters
 
-/** Write a float paramter to a buffer.
+/** Write a float parameter to a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to write to.
@@ -106,7 +106,7 @@
  */
 + (bool) bufferf:(ALuint) bufferId parameter:(ALenum) parameter value:(ALfloat) value;
 
-/** Write a 3 float paramter to a buffer.
+/** Write a 3 float parameter to a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter the parameter to write to.
@@ -121,7 +121,7 @@
 			   v2:(ALfloat) v2
 			   v3:(ALfloat) v3;
 
-/** Write a float array paramter to a buffer.
+/** Write a float array parameter to a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to write to.
@@ -130,7 +130,7 @@
  */
 + (bool) bufferfv:(ALuint) bufferId parameter:(ALenum) parameter values:(ALfloat*) values;
 
-/** Write an integer paramter to a buffer.
+/** Write an integer parameter to a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to write to.
@@ -139,7 +139,7 @@
  */
 + (bool) bufferi:(ALuint) bufferId parameter:(ALenum) parameter value:(ALint) value;
 
-/** Write a 3 integer paramter to a buffer.
+/** Write a 3 integer parameter to a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to write to.
@@ -154,7 +154,7 @@
 			   v2:(ALint) v2
 			   v3:(ALint) v3;
 
-/** Write an integer array paramter to a buffer.
+/** Write an integer array parameter to a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to write to.
@@ -165,7 +165,7 @@
 
 #pragma mark Getters
 
-/** Read a float paramter from a buffer.
+/** Read a float parameter from a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to read.
@@ -173,7 +173,7 @@
  */
 + (ALfloat) getBufferf:(ALuint) bufferId parameter:(ALenum) parameter;
 
-/** Read a 3 float paramter from a buffer.
+/** Read a 3 float parameter from a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to read.
@@ -188,7 +188,7 @@
 				  v2:(ALfloat*) v2
 				  v3:(ALfloat*) v3;
 
-/** Read a float array paramter from a buffer.
+/** Read a float array parameter from a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to read.
@@ -197,7 +197,7 @@
  */
 + (bool) getBufferfv:(ALuint) bufferId parameter:(ALenum) parameter values:(ALfloat*) values;
 
-/** Read an integer paramter from a buffer.
+/** Read an integer parameter from a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to read.
@@ -205,7 +205,7 @@
  */
 + (ALint) getBufferi:(ALuint) bufferId parameter:(ALenum) parameter;
 
-/** Read a 3 integer paramter from a buffer.
+/** Read a 3 integer parameter from a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to read.
@@ -220,7 +220,7 @@
 				  v2:(ALint*) v2
 				  v3:(ALint*) v3;
 
-/** Read an integer array paramter from a buffer.
+/** Read an integer array parameter from a buffer.
  *
  * @param bufferId The buffer's ID.
  * @param parameter The parameter to read.
@@ -356,7 +356,7 @@
 
 #pragma mark Setters
 
-/** Write a float paramter to a source.
+/** Write a float parameter to a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to write to.
@@ -365,7 +365,7 @@
  */
 + (bool) sourcef:(ALuint) sourceId parameter:(ALenum) parameter value:(ALfloat) value;
 
-/** Write a 3 float paramter to a source.
+/** Write a 3 float parameter to a source.
  *
  * @param sourceId The source's ID.
  * @param parameter the parameter to write to.
@@ -380,7 +380,7 @@
 			   v2:(ALfloat) v2
 			   v3:(ALfloat) v3;
 
-/** Write a float array paramter to a source.
+/** Write a float array parameter to a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to write to.
@@ -389,7 +389,7 @@
  */
 + (bool) sourcefv:(ALuint) sourceId parameter:(ALenum) parameter values:(ALfloat*) values;
 
-/** Write an integer paramter to a source.
+/** Write an integer parameter to a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to write to.
@@ -398,7 +398,7 @@
  */
 + (bool) sourcei:(ALuint) sourceId parameter:(ALenum) parameter value:(ALint) value;
 
-/** Write a 3 integer paramter to a source.
+/** Write a 3 integer parameter to a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to write to.
@@ -413,7 +413,7 @@
 			   v2:(ALint) v2
 			   v3:(ALint) v3;
 
-/** Write an integer array paramter to a source.
+/** Write an integer array parameter to a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to write to.
@@ -424,7 +424,7 @@
 
 #pragma mark Getters
 
-/** Read a float paramter from a source.
+/** Read a float parameter from a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to read.
@@ -432,7 +432,7 @@
  */
 + (ALfloat) getSourcef:(ALuint) sourceId parameter:(ALenum) parameter;
 
-/** Read a 3 float paramter from a source.
+/** Read a 3 float parameter from a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to read.
@@ -447,7 +447,7 @@
 				  v2:(ALfloat*) v2
 				  v3:(ALfloat*) v3;
 
-/** Read a float array paramter from a source.
+/** Read a float array parameter from a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to read.
@@ -456,7 +456,7 @@
  */
 + (bool) getSourcefv:(ALuint) sourceId parameter:(ALenum) parameter values:(ALfloat*) values;
 
-/** Read an integer paramter from a source.
+/** Read an integer parameter from a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to read.
@@ -464,7 +464,7 @@
  */
 + (ALint) getSourcei:(ALuint) sourceId parameter:(ALenum) parameter;
 
-/** Read a 3 integer paramter from a source.
+/** Read a 3 integer parameter from a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to read.
@@ -479,7 +479,7 @@
 				  v2:(ALint*) v2
 				  v3:(ALint*) v3;
 
-/** Read an integer array paramter from a source.
+/** Read an integer array parameter from a source.
  *
  * @param sourceId The source's ID.
  * @param parameter The parameter to read.
@@ -491,7 +491,7 @@
 #pragma mark -
 #pragma mark Listener
 
-/** Write a float paramter to the current listener.
+/** Write a float parameter to the current listener.
  *
  * @param parameter The parameter to write to.
  * @param value The value to write.
@@ -499,7 +499,7 @@
  */
 + (bool) listenerf:(ALenum) parameter value:(ALfloat) value;
 
-/** Write a 3 float paramter to the current listener.
+/** Write a 3 float parameter to the current listener.
  *
  * @param parameter the parameter to write to.
  * @param v1 The first value to write.
@@ -509,7 +509,7 @@
  */
 + (bool) listener3f:(ALenum) parameter v1:(ALfloat) v1 v2:(ALfloat) v2 v3:(ALfloat) v3;
 
-/** Write a float array paramter to the current listener.
+/** Write a float array parameter to the current listener.
  *
  * @param parameter The parameter to write to.
  * @param values The values to write.
@@ -517,7 +517,7 @@
  */
 + (bool) listenerfv:(ALenum) parameter values:(ALfloat*) values;
 
-/** Write an integer paramter to the current listener.
+/** Write an integer parameter to the current listener.
  *
  * @param parameter The parameter to write to.
  * @param value The value to write.
@@ -525,7 +525,7 @@
  */
 + (bool) listeneri:(ALenum) parameter value:(ALint) value;
 
-/** Write a 3 integer paramter to the current listener.
+/** Write a 3 integer parameter to the current listener.
  *
  * @param parameter The parameter to write to.
  * @param v1 The first value to write.
@@ -535,7 +535,7 @@
  */
 + (bool) listener3i:(ALenum) parameter v1:(ALint) v1 v2:(ALint) v2 v3:(ALint) v3;
 
-/** Write an integer array paramter to the current listener.
+/** Write an integer array parameter to the current listener.
  *
  * @param parameter The parameter to write to.
  * @param values The values to write.
@@ -544,14 +544,14 @@
 + (bool) listeneriv:(ALenum) parameter values:(ALint*) values;
 
 
-/** Read a float paramter from the current listener.
+/** Read a float parameter from the current listener.
  *
  * @param parameter The parameter to read.
  * @return The parameter's value.
  */
 + (ALfloat) getListenerf:(ALenum) parameter;
 
-/** Read a 3 float paramter from the current listener.
+/** Read a 3 float parameter from the current listener.
  *
  * @param parameter The parameter to read.
  * @param v1 The first value to read.
@@ -561,7 +561,7 @@
  */
 + (bool) getListener3f:(ALenum) parameter v1:(ALfloat*) v1 v2:(ALfloat*) v2 v3:(ALfloat*) v3;
 
-/** Read a float array paramter from the current listener.
+/** Read a float array parameter from the current listener.
  *
  * @param parameter The parameter to read.
  * @param values An array to store the values.
@@ -569,14 +569,14 @@
  */
 + (bool) getListenerfv:(ALenum) parameter values:(ALfloat*) values;
 
-/** Read an integer paramter from the current listener.
+/** Read an integer parameter from the current listener.
  *
  * @param parameter The parameter to read.
  * @return The parameter's value.
  */
 + (ALint) getListeneri:(ALenum) parameter;
 
-/** Read a 3 integer paramter from the current listener.
+/** Read a 3 integer parameter from the current listener.
  *
  * @param parameter The parameter to read.
  * @param v1 The first value to read.
@@ -586,7 +586,7 @@
  */
 + (bool) getListener3i:(ALenum) parameter v1:(ALint*) v1 v2:(ALint*) v2 v3:(ALint*) v3;
 
-/** Read an integer array paramter from the current listener.
+/** Read an integer array parameter from the current listener.
  *
  * @param parameter The parameter to read.
  * @param values An array to store the values.
