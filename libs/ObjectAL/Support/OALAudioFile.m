@@ -240,7 +240,8 @@
 						  url);
 			goto onFail;
 		}
-		
+		bzero(streamData, streamSizeInBytes);
+        
 		AudioBufferList bufferList;
 		bufferList.mNumberBuffers = 1;
 		bufferList.mBuffers[0].mNumberChannels = streamDescription.mChannelsPerFrame;
