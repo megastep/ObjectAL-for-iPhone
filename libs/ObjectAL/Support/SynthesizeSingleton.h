@@ -106,7 +106,7 @@
 
 #define SYNTHESIZE_SINGLETON_FOR_CLASS(SS_CLASSNAME)	\
 	\
-static volatile SS_CLASSNAME* _##SS_CLASSNAME##_sharedInstance = nil;	\
+static SS_CLASSNAME* _##SS_CLASSNAME##_sharedInstance = nil;	\
 	\
 + (SS_CLASSNAME*) sharedInstanceNoSynch	\
 {	\
@@ -196,7 +196,7 @@ static volatile SS_CLASSNAME* _##SS_CLASSNAME##_sharedInstance = nil;	\
 	return [super retainCount];	\
 }	\
 	\
-- (void)release	\
+- (oneway void)release	\
 {	\
 	NSAssert1(1==0, @"SynthesizeSingleton: %@ ERROR: -(void)release method did not get swizzled.", self);	\
 }	\
