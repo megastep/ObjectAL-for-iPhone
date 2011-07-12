@@ -1183,24 +1183,10 @@
 
 - (bool) queueBuffer:(ALBuffer*) bufferIn
 {
-	OPTIONALLY_SYNCHRONIZED(self)
-	{
-		if(self.suspended)
-		{
-			OAL_LOG_DEBUG(@"%@: Called mutator on suspended object", self);
-			return NO;
-		}
-		
-		if(AL_STATIC == self.state)
-		{
-			self.buffer = nil;
-		}
-		ALuint bufferId = bufferIn.bufferId;
-		return [ALWrapper sourceQueueBuffers:sourceId numBuffers:1 bufferIds:&bufferId];
-	}
+    return [self queueBuffer:bufferIn repeats:0];
 }
 
-- (bool) queueBuffers:(NSArray*) buffers
+- (bool) queueBuffer:(ALBuffer*) bufferIn repeats:(NSUInteger) repeats
 {
 	OPTIONALLY_SYNCHRONIZED(self)
 	{
@@ -1214,14 +1200,55 @@
 		{
 			self.buffer = nil;
 		}
-		int numBuffers = [buffers count];
-		ALuint* bufferIds = (ALuint*)malloc(sizeof(ALuint) * numBuffers);
-		int i = 0;
-		for(ALBuffer* buf in buffers)
+        
+        NSUInteger totalTimes = repeats + 1;
+		ALuint* bufferIds = (ALuint*)malloc(sizeof(ALuint) * totalTimes);
+		ALuint bufferId = bufferIn.bufferId;
+		for(int i = 0; i < totalTimes; i++)
 		{
-			bufferIds[i] = buf.bufferId;
+			bufferIds[i] = bufferId;
 		}
-		bool result = [ALWrapper sourceQueueBuffers:sourceId numBuffers:numBuffers bufferIds:bufferIds];
+		bool result = [ALWrapper sourceQueueBuffers:sourceId numBuffers:totalTimes bufferIds:bufferIds];
+		free(bufferIds);
+		return result;
+	}
+}
+
+- (bool) queueBuffers:(NSArray*) buffers
+{
+    return [self queueBuffers:buffers repeats:0];
+}
+
+- (bool) queueBuffers:(NSArray*) buffers repeats:(NSUInteger) repeats
+{
+	OPTIONALLY_SYNCHRONIZED(self)
+	{
+		if(self.suspended)
+		{
+			OAL_LOG_DEBUG(@"%@: Called mutator on suspended object", self);
+			return NO;
+		}
+		
+		if(AL_STATIC == self.state)
+		{
+			self.buffer = nil;
+		}
+
+        NSUInteger numBuffers = [buffers count];
+        NSUInteger totalTimes = repeats + 1;
+		ALuint* bufferIds = (ALuint*)malloc(sizeof(ALuint) * totalTimes * numBuffers);
+        NSUInteger bufferNum;
+        
+		for(NSUInteger i = 0; i < totalTimes; i++)
+		{
+            bufferNum = 0;
+            for(ALBuffer* buf in buffers)
+            {
+                bufferIds[(i * numBuffers) + bufferNum] = buf.bufferId;
+                bufferNum++;
+            }
+		}
+		bool result = [ALWrapper sourceQueueBuffers:sourceId numBuffers:totalTimes*numBuffers bufferIds:bufferIds];
 		free(bufferIds);
 		return result;
 	}
