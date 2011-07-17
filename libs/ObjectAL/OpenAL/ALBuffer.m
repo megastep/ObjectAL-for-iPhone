@@ -125,8 +125,8 @@
 
 - (ALBuffer*)sliceWithName:(NSString *) sliceName offset:(ALsizei) offset size:(ALsizei) size {
 	int frameSize = self.channels * self.bits / 8;
-	int byteOffset = offset * frameSize;
-	int byteSize = size * frameSize;
+	ALuint byteOffset = offset * frameSize;
+	ALuint byteSize = size * frameSize;
 
 	if (offset < 0)
 	{
