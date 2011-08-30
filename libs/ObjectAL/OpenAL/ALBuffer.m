@@ -61,7 +61,7 @@
 
 		[ALWrapper bufferDataStatic:bufferId format:format data:bufferData size:size frequency:frequency];
 		
-		duration = (float)self.size / ((float)self.frequency * (float)self.bits / 8);
+		duration = (float)self.size / ((float)(self.frequency * self.channels * self.bits) / 8);
 	}
 	return self;
 }
