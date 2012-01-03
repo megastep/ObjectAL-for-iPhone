@@ -1528,6 +1528,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = ObjectAL;
+				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Distribution;
@@ -1632,6 +1633,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = ObjectAL;
+				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = "Ad Hoc";
@@ -1730,6 +1732,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = ObjectAL;
+				SKIP_INSTALL = YES;
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Debug;
