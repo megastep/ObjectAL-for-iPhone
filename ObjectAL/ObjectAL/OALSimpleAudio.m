@@ -67,6 +67,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(OALSimpleAudio);
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(OALSimpleAudio);
 
+@synthesize device;
+@synthesize context;
 
 + (OALSimpleAudio*) sharedInstanceWithSources:(int) sources
 {
