@@ -140,9 +140,9 @@
 
 - (ALBuffer*)sliceWithName:(NSString *) sliceName offset:(ALsizei) offset size:(ALsizei) size
 {
-	int frameSize = self.channels * self.bits / 8;
-	ALuint byteOffset = offset * frameSize;
-	ALuint byteSize = size * frameSize;
+    int frameSize = self.channels * self.bits / 8;
+	ALuint byteOffset = (ALuint)(offset * frameSize);
+	ALuint byteSize = (ALuint)(size * frameSize);
 
 	if (offset < 0)
 	{
@@ -156,13 +156,13 @@
 		return nil;
 	}
 
-	if (byteOffset + byteSize > self.size)
+	if (byteOffset + byteSize > (ALuint)self.size)
 	{
-		OAL_LOG_ERROR(@"%@: Buffer offset+size goes beyond end of buffer (%d + %d > %d). Returning nil", self, offset, size, self.size / frameSize);
+		OAL_LOG_ERROR(@"%@: Buffer offset+size goes beyond end of buffer (%d + %d > %u). Returning nil", self, offset, size, self.size / frameSize);
 		return nil;
 	}
 
-	ALBuffer * slice = [ALBuffer bufferWithName:sliceName data:(void*)(byteOffset + (char*)bufferData) size:byteSize
+	ALBuffer * slice = [ALBuffer bufferWithName:sliceName data:(void*)(byteOffset + (char*)bufferData) size:(ALsizei)byteSize
 										 format:self.format frequency:self.frequency];
 	slice.freeDataOnDestroy = NO;
 	slice->parentBuffer = arcsafe_retain(self);
