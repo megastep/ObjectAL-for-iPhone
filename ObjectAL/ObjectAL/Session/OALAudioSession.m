@@ -42,6 +42,7 @@
 SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(OALAudioSession);
 
 
+/** \cond */
 /**
  * (INTERNAL USE) Private methods for OALAudioSupport. 
  */
@@ -75,6 +76,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(OALAudioSession);
  */
 - (void) setIntProperty:(AudioSessionPropertyID) property value:(UInt32) value;
 
+/** (INTERNAL USE) Set an AudioSession property.
+ *
+ * @param property The property to set.
+ * @param value The value to set this property to.
+ */
+- (void) setFloatProperty:(AudioSessionPropertyID) property value:(Float32) value;
+
 /** (INTERNAL USE) Set the Audio Session category and properties based on current settings.
  */
 - (void) setAudioMode;
@@ -97,6 +105,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(OALAudioSession);
 - (void) onAudioError:(NSNotification*) notification;
 
 @end
+/** \endcond */
 
 
 @implementation OALAudioSession
@@ -117,7 +126,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALAudioSession);
 		
 		// Set up defaults
 		handleInterruptions = YES;
-		audioSessionDelegate = nil;
 		allowIpod = YES;
 		ipodDucking = NO;
 		useHardwareIfAvailable = YES;
@@ -251,6 +259,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALAudioSession);
 	}
 }
 
+- (float) preferredIOBufferDuration
+{
+    return [self getFloatProperty:kAudioSessionProperty_PreferredHardwareIOBufferDuration];
+}
+
+- (void) setPreferredIOBufferDuration:(float)value
+{
+    [self setFloatProperty:kAudioSessionProperty_PreferredHardwareIOBufferDuration
+                     value:value];
+}
+
 - (bool) ipodPlaying
 {
 	return 0 != [self getIntProperty:kAudioSessionProperty_OtherAudioIsPlaying];
@@ -324,6 +343,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALAudioSession);
 }
 
 - (void) setIntProperty:(AudioSessionPropertyID) property value:(UInt32) value
+{
+	OSStatus result;
+	OPTIONALLY_SYNCHRONIZED(self)
+	{
+		result = AudioSessionSetProperty(property, sizeof(value), &value);
+	}
+	REPORT_AUDIOSESSION_CALL(result, @"Failed to get int property %08x", property);
+}
+
+- (void) setFloatProperty:(AudioSessionPropertyID) property value:(Float32) value
 {
 	OSStatus result;
 	OPTIONALLY_SYNCHRONIZED(self)
@@ -504,10 +533,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALAudioSession);
 	}
 }
 
-// prevent onAudioError: from becoming reentrant due to self.manuallySuspended setting off a chain of calls that result in another
-// error notification broadcast
-static BOOL gHandlingErrorNotification = FALSE;
-
 - (void) onAudioError:(NSNotification*) notification
 {
     #pragma unused(notification)
@@ -522,9 +547,9 @@ static BOOL gHandlingErrorNotification = FALSE;
 	OPTIONALLY_SYNCHRONIZED(self)
 	{
 		NSTimeInterval timeSinceLastReset = [[NSDate date] timeIntervalSinceDate:lastResetTime];
-		if(timeSinceLastReset > kMinTimeIntervalBetweenResets && !gHandlingErrorNotification)
+		if(timeSinceLastReset > kMinTimeIntervalBetweenResets && !handlingErrorNotification)
 		{
-            gHandlingErrorNotification = TRUE;
+            handlingErrorNotification = TRUE;
             
 			OAL_LOG_WARNING(@"Received audio error notification. Resetting audio session.");
 			self.manuallySuspended = YES;
@@ -532,11 +557,14 @@ static BOOL gHandlingErrorNotification = FALSE;
 			arcsafe_release(lastResetTime);
 			lastResetTime = [[NSDate alloc] init];
 		
-            gHandlingErrorNotification = FALSE;
+            handlingErrorNotification = FALSE;
         }
 		else
 		{
-			OAL_LOG_WARNING(@"Received audio error notification, but last reset was %f seconds ago. Doing nothing.", timeSinceLastReset);
+            if(!handlingErrorNotification)
+            {
+                OAL_LOG_WARNING(@"Received audio error notification, but last reset was %f seconds ago. Doing nothing.", timeSinceLastReset);
+            }
 		}
 	}
 #endif
