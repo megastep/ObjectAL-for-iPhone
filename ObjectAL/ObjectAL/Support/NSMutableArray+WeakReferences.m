@@ -5,13 +5,14 @@
 //
 
 #import "NSMutableArray+WeakReferences.h"
+#import "ObjectALMacros.h"
 
 @implementation NSMutableArray (WeakReferences)
 
 + (id) newMutableArrayUsingWeakReferencesWithCapacity:(NSUInteger) capacity
 {
 	CFArrayCallBacks callbacks = {0, NULL, NULL, CFCopyDescription, CFEqual};
-	return (__bridge_transfer id)(CFArrayCreateMutable(0, (CFIndex)capacity, &callbacks));
+	return (arcsafe_bridge_transfer id)(CFArrayCreateMutable(0, (CFIndex)capacity, &callbacks));
 }
 
 + (id) newMutableArrayUsingWeakReferences
@@ -22,9 +23,7 @@
 + (id) mutableArrayUsingWeakReferencesWithCapacity:(NSUInteger) capacity
 {
     id result = [self newMutableArrayUsingWeakReferencesWithCapacity:capacity];
-#if !__has_feature(objc_arc)
-    [result autorelease];
-#endif
+    arcsafe_autorelease(result);
     return result;
 }
 
