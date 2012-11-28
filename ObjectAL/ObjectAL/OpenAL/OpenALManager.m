@@ -30,6 +30,7 @@
 #import "OpenALManager.h"
 #import "NSMutableArray+WeakReferences.h"
 #import "ObjectALMacros.h"
+#import "ARCSafe_MemMgmt.h"
 #import "ALWrapper.h"
 #import "ALDevice.h"
 #import "OALAudioSession.h"
@@ -90,7 +91,7 @@
 				 target:(id) target
 			   selector:(SEL) selector
 {
-	return arcsafe_autorelease([[self alloc] initWithUrl:url
+	return as_autorelease([[self alloc] initWithUrl:url
                                             reduceToMono:reduceToMono
                                                   target:target
                                                 selector:selector]);
@@ -103,7 +104,7 @@
 {
 	if(nil != (self = [super init]))
 	{
-		url = arcsafe_retain(urlIn);
+		url = as_retain(urlIn);
 		reduceToMono = reduceToMonoIn;
 		target = targetIn;
 		selector = selectorIn;
@@ -113,8 +114,8 @@
 
 - (void) dealloc
 {
-	arcsafe_release(url);
-	arcsafe_super_dealloc();
+	as_release(url);
+	as_superdealloc();
 }
 
 - (void)main
@@ -183,10 +184,10 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OpenALManager);
 	OAL_LOG_DEBUG(@"%@: Dealloc", self);
 	[[OALAudioSession sharedInstance] removeSuspendListener:self];
 
-	arcsafe_release(operationQueue);
-	arcsafe_release(suspendHandler);
-	arcsafe_release(devices);
-	arcsafe_super_dealloc();
+	as_release(operationQueue);
+	as_release(suspendHandler);
+	as_release(devices);
+	as_superdealloc();
 }
 
 
@@ -255,8 +256,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OpenALManager);
 			OAL_LOG_DEBUG(@"%@: Called mutator on suspended object", self);
 			return;
 		}
-		
+
 		[ALWrapper setMixerOutputDataRate:frequency];
+	}
+}
+
+- (ALint) renderingQuality
+{
+	OPTIONALLY_SYNCHRONIZED(self)
+	{
+		return [ALWrapper getRenderingQuality];
+	}
+}
+
+- (void) setRenderingQuality:(ALint) renderingQuality
+{
+	OPTIONALLY_SYNCHRONIZED(self)
+	{
+		if(self.suspended)
+		{
+			OAL_LOG_DEBUG(@"%@: Called mutator on suspended object", self);
+			return;
+		}
+
+		[ALWrapper setRenderingQuality:renderingQuality];
 	}
 }
 
@@ -388,7 +411,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OpenALManager);
 
 - (void) clearAllBuffers
 {
-	OPTIONALLY_SYNCHRONIZED(self)
+	OPTIONALLY_SYNCHRONIZED(devices)
 	{
 		for(ALDevice* device in devices)
 		{
@@ -401,7 +424,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OpenALManager);
 
 - (void) notifyDeviceInitializing:(ALDevice*) device
 {
-	OPTIONALLY_SYNCHRONIZED(self)
+	OPTIONALLY_SYNCHRONIZED(devices)
 	{
 		[devices addObject:device];
 	}
@@ -409,7 +432,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OpenALManager);
 
 - (void) notifyDeviceDeallocating:(ALDevice*) device
 {
-	OPTIONALLY_SYNCHRONIZED(self)
+	OPTIONALLY_SYNCHRONIZED(devices)
 	{
 		[devices removeObject:device];
 	}

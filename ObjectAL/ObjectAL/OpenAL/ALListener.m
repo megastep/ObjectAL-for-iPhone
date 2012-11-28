@@ -29,9 +29,9 @@
 
 #import "ALListener.h"
 #import "ObjectALMacros.h"
+#import "ARCSafe_MemMgmt.h"
 #import "ALWrapper.h"
 #import "ALContext.h"
-#import <OpenAL/oalMacOSX_OALExtensions.h>
 
 
 /** \cond */
@@ -49,7 +49,7 @@
 
 + (id) listenerForContext:(ALContext*) context
 {
-	return arcsafe_autorelease([[self alloc] initWithContext:context]);
+	return as_autorelease([[self alloc] initWithContext:context]);
 }
 
 - (id) initWithContext:(ALContext*) contextIn
@@ -66,8 +66,8 @@
 
 - (void) dealloc
 {
-	arcsafe_release(suspendHandler);
-	arcsafe_super_dealloc();
+	as_release(suspendHandler);
+	as_superdealloc();
 }
 
 #pragma mark Properties
@@ -76,10 +76,7 @@
 
 - (bool) muted
 {
-	OPTIONALLY_SYNCHRONIZED(self)
-	{
-		return muted;
-	}
+    return muted;
 }
 
 - (void) setMuted:(bool) value
@@ -100,10 +97,7 @@
 
 - (float) gain
 {
-	OPTIONALLY_SYNCHRONIZED(self)
-	{
-		return gain;
-	}
+    return gain;
 }
 
 - (void) setGain:(float) value

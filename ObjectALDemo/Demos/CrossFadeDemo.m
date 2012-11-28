@@ -43,14 +43,14 @@
 		[self buildUI];
 
 		// We'll do an S-Curve fade.
-		fadeFunction = [[OALSCurveFunction function] retain];
+		fadeFunction = [OALEaseAction easeFunctionForShape:kOALEaseShapeSine
+                                                     phase:kOALEaseInOut];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
-	[fadeFunction release];
 	[firstBuffer release];
 	[firstSource release];
 	[secondBuffer release];
@@ -97,9 +97,8 @@
 
 - (void) onEnterTransitionDidFinish
 {
-	// Initialize the OpenAL device and context here instead of in init so that
-	// it doesn't happen prematurely.
-	
+    [super onEnterTransitionDidFinish];
+
 	// We'll let OALSimpleAudio deal with the device and context.
 	// Since we're not going to use it for playing effects, don't give it any sources.
 	[OALSimpleAudio sharedInstance].reservedSources = 0;
@@ -125,8 +124,8 @@
 
 - (void) onCrossfadeChanged:(Slider*) slider
 {
-	firstSource.gain = [fadeFunction valueForInput:1 - slider.value];
-	secondSource.gain = [fadeFunction valueForInput:slider.value];
+	firstSource.gain = fadeFunction(1 - slider.value);
+	secondSource.gain = (slider.value);
 }
 
 

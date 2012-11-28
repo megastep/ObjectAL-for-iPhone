@@ -8,6 +8,7 @@
 #import "AudioTrackDemo.h"
 #import "MainScene.h"
 #import "CCLayer+Scene.h"
+#import "ImageButton.h"
 #import "ImageAndLabelButton.h"
 #import "Slider.h"
 #import "ObjectAL.h"
@@ -140,10 +141,6 @@
 	button.anchorPoint = ccp(1,1);
 	button.position = ccp(screenSize.width, screenSize.height);
 	[self addChild:button z:250];
-}
-
-- (void) onEnterTransitionDidFinish
-{
 }
 
 - (void) onPlayStop:(LampButton*) button

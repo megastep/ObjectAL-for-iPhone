@@ -29,6 +29,7 @@
 
 #import "OALAudioFile.h"
 #import "ObjectALMacros.h"
+#import "ARCSafe_MemMgmt.h"
 
 
 @implementation OALAudioFile
@@ -36,7 +37,7 @@
 + (OALAudioFile*) fileWithUrl:(NSURL*) url
 				 reduceToMono:(bool) reduceToMono
 {
-	return arcsafe_autorelease([[self alloc] initWithUrl:url reduceToMono:reduceToMono]);
+	return as_autorelease([[self alloc] initWithUrl:url reduceToMono:reduceToMono]);
 }
 
 
@@ -45,7 +46,7 @@
 {
 	if(nil != (self = [super init]))
 	{
-		url = arcsafe_retain(urlIn);
+		url = as_retain(urlIn);
 		reduceToMono = reduceToMonoIn;
 
 		OSStatus error;
@@ -58,7 +59,7 @@
 		}
 
 		// Open the file
-		if(noErr != (error = ExtAudioFileOpenURL((arcsafe_bridge CFURLRef)url, &fileHandle)))
+		if(noErr != (error = ExtAudioFileOpenURL((as_bridge CFURLRef)url, &fileHandle)))
 		{
 			REPORT_EXTAUDIO_CALL(error, @"Could not open url %@", url);
 			goto done;
@@ -105,7 +106,7 @@
 			// Don't allow more than 2 channels (stereo)
 			OAL_LOG_WARNING(@"Audio stream in %@ contains %ld channels. Capping at 2",
 							url,
-							streamDescription.mChannelsPerFrame);
+							(long)streamDescription.mChannelsPerFrame);
 			streamDescription.mChannelsPerFrame = 2;
 		}
 
@@ -126,7 +127,7 @@
 	done:
 		if(noErr != error)
 		{
-			arcsafe_release(self);
+			as_release(self);
 			return nil;
 		}
 		
@@ -142,8 +143,8 @@
         fileHandle = nil;
     }
 
-	arcsafe_release(url);
-	arcsafe_super_dealloc();
+	as_release(url);
+	as_superdealloc();
 }
 
 - (NSString*) description
@@ -215,7 +216,7 @@
 		if(nil == streamData)
 		{
 			OAL_LOG_ERROR(@"Could not allocate %ld bytes for audio buffer from file (url = %@)",
-						  streamSizeInBytes,
+						  (long)streamSizeInBytes,
 						  url);
 			goto onFail;
 		}
@@ -223,7 +224,7 @@
 		
 		if(noErr != (error = ExtAudioFileSeek(fileHandle, startFrame)))
 		{
-			REPORT_EXTAUDIO_CALL(error, @"Could not seek to %ll in file (url = %@)",
+			REPORT_EXTAUDIO_CALL(error, @"Could not seek to %lld in file (url = %@)",
 								 startFrame,
 								 url);
 			goto onFail;
@@ -327,7 +328,7 @@
 	ALBuffer* buffer = [file bufferNamed:[url description]
 							  startFrame:0
 							   numFrames:-1];
-	arcsafe_release(file);
+	as_release(file);
 	return buffer;
 }
 

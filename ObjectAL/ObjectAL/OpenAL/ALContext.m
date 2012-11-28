@@ -30,6 +30,7 @@
 #import "ALContext.h"
 #import "NSMutableArray+WeakReferences.h"
 #import "ObjectALMacros.h"
+#import "ARCSafe_MemMgmt.h"
 #import "ALWrapper.h"
 #import "OpenALManager.h"
 #import "ALDevice.h"
@@ -52,13 +53,23 @@
 /** \endcond */
 
 
+@interface ALContext ()
+@property(nonatomic, readwrite, retain) ALDevice *device;
+
+@end
+
 @implementation ALContext
+@synthesize device;
+@synthesize sources;
+@synthesize listener;
+@synthesize context;
+@synthesize attributes;
 
 #pragma mark Object Management
 
 + (id) contextOnDevice:(ALDevice *) device attributes:(NSArray*) attributes
 {
-	return arcsafe_autorelease([[self alloc] initOnDevice:device attributes:attributes]);
+	return as_autorelease([[self alloc] initOnDevice:device attributes:attributes]);
 }
 
 + (id) contextOnDevice:(ALDevice*) device
@@ -135,12 +146,12 @@
 {
 	if(nil != (self = [super init]))
 	{
-		OAL_LOG_DEBUG(@"%@: Init on %@ with attributes 0x%08x", self, deviceIn, attributesIn);
+		OAL_LOG_DEBUG(@"%@: Init on %@ with attributes %@", self, deviceIn, attributesIn);
 
 		if(nil == deviceIn)
 		{
 			OAL_LOG_ERROR(@"%@: Failed to init because device was nil. Returning nil", self);
-			arcsafe_release(self);
+			as_release(self);
 			return nil;
 		}
 
@@ -160,7 +171,7 @@
 		}
 		
 		// Notify the device that we are being created.
-		device = arcsafe_retain(deviceIn);
+		device = as_retain(deviceIn);
 		[device notifyContextInitializing:self];
 
 		// Open the context with our list of attributes.
@@ -218,12 +229,12 @@
     }
     [ALWrapper destroyContext:context];
 
-	arcsafe_release(sources);
-	arcsafe_release(listener);
-	arcsafe_release(device);
-	arcsafe_release(attributes);
-	arcsafe_release(suspendHandler);
-	arcsafe_super_dealloc();
+	as_release(sources);
+	as_release(listener);
+	as_release(device);
+	as_release(attributes);
+	as_release(suspendHandler);
+	as_superdealloc();
 }
 
 
@@ -234,11 +245,6 @@
 	return [ALWrapper getString:AL_VERSION];
 }
 
-@synthesize attributes;
-
-@synthesize context;
-
-@synthesize device;
 
 - (ALenum) distanceModel
 {
@@ -289,14 +295,15 @@
 	return [ALWrapper getSpaceSeparatedStringList:AL_EXTENSIONS];
 }
 
-@synthesize listener;
+
 
 - (NSString*) renderer
 {
 	return [ALWrapper getString:AL_RENDERER];
 }
 
-@synthesize sources;
+
+
 
 - (float) speedOfSound
 {
@@ -380,7 +387,7 @@
 
 - (void) clearBuffers
 {
-	OPTIONALLY_SYNCHRONIZED(self)
+	OPTIONALLY_SYNCHRONIZED(sources)
 	{
 		for(ALSource* source in sources)
 		{
@@ -402,7 +409,7 @@
 
 - (void) stopAllSounds
 {
-	OPTIONALLY_SYNCHRONIZED(self)
+	OPTIONALLY_SYNCHRONIZED(sources)
 	{
 		if(self.suspended)
 		{
@@ -448,7 +455,7 @@
 
 - (void) notifySourceInitializing:(ALSource*) source
 {
-	OPTIONALLY_SYNCHRONIZED(self)
+	OPTIONALLY_SYNCHRONIZED(sources)
 	{
 		[sources addObject:source];
 	}
@@ -456,7 +463,7 @@
 
 - (void) notifySourceDeallocating:(ALSource*) source
 {
-	OPTIONALLY_SYNCHRONIZED(self)
+	OPTIONALLY_SYNCHRONIZED(sources)
 	{
 		[sources removeObject:source];
 	}

@@ -1,12 +1,11 @@
 //
 //  MainLayer.m
-//  ObjectAL
+//  ObjectALDemo
 //
-//  Created by Karl Stenerud on 10-05-29.
+//  Created by Monkey on 7/09/12.
 //
 
 #import "MainScene.h"
-#import "CCLayer+Scene.h"
 
 #import "SingleSourceDemo.h"
 #import "TwoSourceDemo.h"
@@ -20,6 +19,8 @@
 #import "HardwareDemo.h"
 #import "AudioSessionDemo.h"
 #import "ReverbDemo.h"
+#import "SourceNotificationsDemo.h"
+#import "IntroAndMainTrackDemo.h"
 
 
 #define kScenesPerPage 5
@@ -130,6 +131,8 @@ static uint startIndex = 0;
 	[self addScene:[ReverbDemo class] named:@"Reverb"];
 	[self addScene:[AudioTrackDemo class] named:@"Audio Tracks"];
 	[self addScene:[PlanetKillerDemo class] named:@"Planet Killer (OALSimpleAudio)"];
+	[self addScene:[IntroAndMainTrackDemo class] named:@"Intro and Main Track"];
+	[self addScene:[SourceNotificationsDemo class] named:@"Source Notifications"];
 	[self addScene:[HardwareDemo class] named:@"Hardware Monitor"];
 	[self addScene:[AudioSessionDemo class] named:@"Audio Sessions"];
 }
@@ -142,20 +145,17 @@ static uint startIndex = 0;
 
 - (void) onEnterTransitionDidFinish
 {
-	/* De-init audio.
-     *
-     * The individual demos assume that they are the only thing configuring
-     * audio, and always assume that the audio starts out uninitialized.
-     *
-     * De-initializing everything here ensures that assumption holds true.
-     *
-     * In a real app, you'd initialize and configure audio once and ONLY once,
-     * at app startup (usually in the app delegate).
-	 */
-	[OALSimpleAudio purgeSharedInstance];
-	[OpenALManager purgeSharedInstance];
-    //	[OALAudioTracks purgeSharedInstance];
-	[OALAudioSession purgeSharedInstance];
+    // Note: I used to destroy and recreate OALSimpleAudio and friends, but
+    // a bug in iOS 5 can cause the OpenAL device to not close when you tell it
+    // to, so this is the next best thing I can do.
+
+    // Restore some sensible defaults in case a demo changed it.
+
+    [[OALSimpleAudio sharedInstance] stopAllEffects];
+    [[OALAudioTracks sharedInstance] stopAllTracks];
+	[OALSimpleAudio sharedInstance].reservedSources = 32;
+    [OALSimpleAudio sharedInstance].context.listener.reverbOn = NO;
+
 }
 
 - (void) setStartIndex:(uint) newIndex
@@ -171,7 +171,7 @@ static uint startIndex = 0;
 	oldMenu = menu;
 	
 	previousButton.visible = previousButton.isTouchEnabled = startIndex > 0;
-	nextButton.visible = nextButton.isTouchEnabled = startIndex < [scenes count] - kScenesPerPage - 1;
+	nextButton.visible = nextButton.isTouchEnabled = startIndex < [scenes count] - kScenesPerPage;
 	
 	menu = [CCMenu menuWithItems:nil];
 	uint endIndex = startIndex + kScenesPerPage - 1;
@@ -206,7 +206,7 @@ static uint startIndex = 0;
 							 nil],
 							[CCCallFunc actionWithTarget:self selector:@selector(onMenuSlideComplete)],
 							nil];
-		[CCTouchDispatcher sharedDispatcher].dispatchEvents = NO;
+		[[CCDirector sharedDirector] touchDispatcher].dispatchEvents = NO;
 		[self runAction:action];
 	}
 }
@@ -216,7 +216,7 @@ static uint startIndex = 0;
 	[oldMenu removeFromParentAndCleanup:YES];
 	oldMenu = nil;
     
-	[CCTouchDispatcher sharedDispatcher].dispatchEvents = YES;
+	[[CCDirector sharedDirector] touchDispatcher].dispatchEvents = YES;
 }
 
 - (void) onSceneSelect:(IndexedMenuItemLabel*) item
