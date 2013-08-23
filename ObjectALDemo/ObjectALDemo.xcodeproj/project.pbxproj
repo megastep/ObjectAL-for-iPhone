@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB1AD2B917C6D73D00378C18 /* HighSpeedPlaybackDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1AD2B817C6D73D00378C18 /* HighSpeedPlaybackDemo.m */; };
+		CB1AD2BA17C6D73D00378C18 /* HighSpeedPlaybackDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1AD2B817C6D73D00378C18 /* HighSpeedPlaybackDemo.m */; };
 		CB5E9943171D18D7004CF421 /* ObjectAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5E9942171D18D7004CF421 /* ObjectAL.framework */; };
 		CBBAAD8F171D080E009B955F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBAA8A0171D0622009B955F /* Foundation.framework */; };
 		CBBAADB9171D0844009B955F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBAA8B2171D065C009B955F /* Cocoa.framework */; };
@@ -489,6 +491,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CB1AD2B717C6D73D00378C18 /* HighSpeedPlaybackDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighSpeedPlaybackDemo.h; sourceTree = "<group>"; };
+		CB1AD2B817C6D73D00378C18 /* HighSpeedPlaybackDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighSpeedPlaybackDemo.m; sourceTree = "<group>"; };
 		CB5E9942171D18D7004CF421 /* ObjectAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectAL.framework; path = ../ObjectAL/build/Release/ObjectAL.framework; sourceTree = "<group>"; };
 		CBBAA8A0171D0622009B955F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBBAA8B2171D065C009B955F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -1490,6 +1494,8 @@
 				CBBAB4BE171D0EC2009B955F /* TwoSourceDemo.m */,
 				CBBAB4BF171D0EC2009B955F /* VolumePitchPanDemo.h */,
 				CBBAB4C0171D0EC2009B955F /* VolumePitchPanDemo.m */,
+				CB1AD2B717C6D73D00378C18 /* HighSpeedPlaybackDemo.h */,
+				CB1AD2B817C6D73D00378C18 /* HighSpeedPlaybackDemo.m */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -1703,7 +1709,7 @@
 		CBBAA855171D05E1009B955F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Karl Stenerud";
 			};
 			buildConfigurationList = CBBAA858171D05E1009B955F /* Build configuration list for PBXProject "ObjectALDemo" */;
@@ -2046,6 +2052,7 @@
 				CBBAB44F171D0D9D009B955F /* ImageButton.m in Sources */,
 				CBBAB451171D0D9D009B955F /* LampButton.m in Sources */,
 				CBBAB453171D0D9D009B955F /* RNG.m in Sources */,
+				CB1AD2B917C6D73D00378C18 /* HighSpeedPlaybackDemo.m in Sources */,
 				CBBAB455171D0D9D009B955F /* Slider.m in Sources */,
 				CBBAB457171D0D9D009B955F /* TargetedAction.m in Sources */,
 				CBBAB459171D0D9D009B955F /* TouchableNode.m in Sources */,
@@ -2097,6 +2104,7 @@
 				CBBAB4D2171D0EC2009B955F /* ReverbDemo.m in Sources */,
 				CBBAB4D4171D0EC2009B955F /* SingleSourceDemo.m in Sources */,
 				CBBAB4D6171D0EC2009B955F /* SourceNotificationsDemo.m in Sources */,
+				CB1AD2BA17C6D73D00378C18 /* HighSpeedPlaybackDemo.m in Sources */,
 				CBBAB4D8171D0EC2009B955F /* TwoSourceDemo.m in Sources */,
 				CBBAB4DA171D0EC2009B955F /* VolumePitchPanDemo.m in Sources */,
 			);
@@ -2157,7 +2165,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -2181,7 +2188,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -2195,9 +2201,7 @@
 				DSTROOT = /tmp/cocos2d__iOS_.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2d (iOS)/cocos2d (iOS)-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"cocos2d (iOS)/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"cocos2d (iOS)/kazmath/include\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = cocos2d;
@@ -2212,9 +2216,7 @@
 				DSTROOT = /tmp/cocos2d__iOS_.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cocos2d (iOS)/cocos2d (iOS)-Prefix.pch";
-				HEADER_SEARCH_PATHS = (
-					"\"cocos2d (iOS)/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"cocos2d (iOS)/kazmath/include\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = cocos2d;
@@ -2225,7 +2227,6 @@
 		CBBAADC5171D0844009B955F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -2240,9 +2241,7 @@
 				GCC_PREFIX_HEADER = "cocos2d (OSX)/cocos2d (OSX)-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = (
-					"\"cocos2d (iOS)/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"cocos2d (iOS)/kazmath/include\"";
 				INFOPLIST_FILE = "cocos2d (OSX)/cocos2d (OSX)-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = cocos2d;
@@ -2254,7 +2253,6 @@
 		CBBAADC6171D0844009B955F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -2270,9 +2268,7 @@
 				GCC_PREFIX_HEADER = "cocos2d (OSX)/cocos2d (OSX)-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
-				HEADER_SEARCH_PATHS = (
-					"\"cocos2d (iOS)/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"cocos2d (iOS)/kazmath/include\"";
 				INFOPLIST_FILE = "cocos2d (OSX)/cocos2d (OSX)-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = cocos2d;
@@ -2285,7 +2281,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -2297,9 +2292,7 @@
 					"COCOS2D_DEBUG=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"\"cocos2d (iOS)/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"cocos2d (iOS)/kazmath/include\"";
 				INFOPLIST_FILE = "OALDemo (iOS)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
@@ -2320,7 +2313,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -2331,9 +2323,7 @@
 					"NS_BLOCK_ASSERTIONS=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				HEADER_SEARCH_PATHS = (
-					"\"cocos2d (iOS)/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"cocos2d (iOS)/kazmath/include\"";
 				INFOPLIST_FILE = "OALDemo (iOS)/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
@@ -2355,8 +2345,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2372,9 +2362,7 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"cocos2d (iOS)/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"cocos2d (iOS)/kazmath/include\"";
 				INFOPLIST_FILE = "OALDemo (OSX)/Resources/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
@@ -2391,8 +2379,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2408,9 +2396,7 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"cocos2d (iOS)/kazmath/include\"",
-				);
+				HEADER_SEARCH_PATHS = "\"cocos2d (iOS)/kazmath/include\"";
 				INFOPLIST_FILE = "OALDemo (OSX)/Resources/Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
