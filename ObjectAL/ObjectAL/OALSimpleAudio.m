@@ -139,6 +139,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(OALSimpleAudio);
 	return self;
 
 initFailed:
+    [[self class] purgeSharedInstance];
     as_release(self);
     return nil;
 }
@@ -165,6 +166,7 @@ initFailed:
 	return self;
 
 initFailed:
+    [[self class] purgeSharedInstance];
     as_release(self);
     return nil;
 }
