@@ -567,7 +567,7 @@ initFailed:
                        dispatch_async(dispatch_get_main_queue(),
                                       ^{
                                           completionBlock(retBuffer);
-                                          pendingLoadCount--;
+                                          self->pendingLoadCount--;
                                       });
                    });
 	return YES;
@@ -608,7 +608,7 @@ initFailed:
                                            ^{
                                                if(cnt == total)
                                                {
-                                                   pendingLoadCount		-= total;
+                                                   self->pendingLoadCount		-= total;
                                                }
                                                progressBlock(cnt, successCount, total);
                                            });
