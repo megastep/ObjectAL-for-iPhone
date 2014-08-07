@@ -101,11 +101,11 @@
  * @param frequency The sampling frequency in Hz.
  * @return A new buffer.
  */
-+ (id) bufferWithName:(NSString*) name
-				 data:(void*) data
-				 size:(ALsizei) size
-			   format:(ALenum) format
-			frequency:(ALsizei) frequency;
++ (instancetype) bufferWithName:(NSString*) name
+                           data:(void*) data
+                           size:(ALsizei) size
+                         format:(ALenum) format
+                      frequency:(ALsizei) frequency;
 
 /** Initialize the buffer.
  *

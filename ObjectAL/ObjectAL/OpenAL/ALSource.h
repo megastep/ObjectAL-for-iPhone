@@ -119,14 +119,14 @@ typedef void (^OALSourceNotificationCallback)(ALSource* source, ALuint notificat
  *
  * @return A new source.
  */
-+ (id) source;
++ (instancetype) source;
 
 /** Create a new source on the specified context.
  *
  * @param context the context to create the source on.
  * @return A new source.
  */
-+ (id) sourceOnContext:(ALContext*) context;
++ (instancetype) sourceOnContext:(ALContext*) context;
 
 /** Initialize a new source on the specified context.
  *

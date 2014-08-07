@@ -64,7 +64,7 @@
 /**
  * (INTERNAL USE) Private methods for ALChannelSource.
  */
-@interface ALChannelSource (Private)
+@interface ALChannelSource ()
 
 /** (INTERNAL USE) Called by the action system when a fade completes.
  */

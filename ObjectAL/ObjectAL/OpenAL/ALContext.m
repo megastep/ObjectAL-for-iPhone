@@ -43,7 +43,7 @@
 /**
  * (INTERNAL USE) Private methods for ALContext.
  */
-@interface ALContext (Private)
+@interface ALContext ()
 
 /** (INTERNAL USE) Called by SuspendHandler.
  */

@@ -74,7 +74,7 @@
  * @param deviceSpecifier The device to open (nil = default device).
  * @return A new device.
  */
-+ (id) deviceWithDeviceSpecifier:(NSString*) deviceSpecifier;
++ (instancetype) deviceWithDeviceSpecifier:(NSString*) deviceSpecifier;
 
 /** Initialize with the specified device.
  *

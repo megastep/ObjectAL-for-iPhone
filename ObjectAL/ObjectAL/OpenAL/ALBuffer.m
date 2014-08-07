@@ -39,11 +39,11 @@
 
 #pragma mark Object Management
 
-+ (id) bufferWithName:(NSString*) name
-                 data:(void*) data
-                 size:(ALsizei) size
-               format:(ALenum) format
-            frequency:(ALsizei) frequency
++ (instancetype) bufferWithName:(NSString*) name
+                           data:(void*) data
+                           size:(ALsizei) size
+                         format:(ALenum) format
+                      frequency:(ALsizei) frequency
 {
 	return as_autorelease([[self alloc] initWithName:name
                                                      data:data

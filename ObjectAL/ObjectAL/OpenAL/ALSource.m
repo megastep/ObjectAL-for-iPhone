@@ -86,12 +86,12 @@ static ALvoid alSourceNotification(ALuint sid, ALuint notificationID, ALvoid* us
 
 #pragma mark Object Management
 
-+ (id) source
++ (instancetype) source
 {
 	return as_autorelease([[self alloc] init]);
 }
 
-+ (id) sourceOnContext:(ALContext*) context
++ (instancetype) sourceOnContext:(ALContext*) context
 {
 	return as_autorelease([[self alloc] initOnContext:context]);
 }

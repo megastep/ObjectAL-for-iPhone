@@ -47,7 +47,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(OALSimpleAudio);
 /**
  * (INTERNAL USE) Private interface to OALSimpleAudio.
  */
-@interface OALSimpleAudio (Private)
+@interface OALSimpleAudio ()
 
 /** (INTERNAL USE) Preload a sound effect and return the preloaded buffer.
  *

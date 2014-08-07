@@ -4,4 +4,7 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+
+    #import "ARCSafe_MemMgmt.h"
+    #import "ObjectALMacros.h"
 #endif

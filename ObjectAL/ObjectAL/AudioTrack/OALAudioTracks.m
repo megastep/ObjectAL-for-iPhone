@@ -39,7 +39,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(OALAudioTracks);
 /**
  * (INTERNAL USE) Private methods for OALAudioTracks.
  */
-@interface OALAudioTracks (Private)
+@interface OALAudioTracks ()
 
 /** (INTERNAL USE) Read deviceCurrentTime from an audio player
  * as a workaround for a bug in iOS devices that causes the value

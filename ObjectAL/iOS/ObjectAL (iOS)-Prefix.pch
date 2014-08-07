@@ -4,4 +4,7 @@
 
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
+
+    #import "ARCSafe_MemMgmt.h"
+    #import "ObjectALMacros.h"
 #endif

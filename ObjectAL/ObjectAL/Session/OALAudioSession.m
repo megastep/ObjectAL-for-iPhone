@@ -50,7 +50,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS_PROTOTYPE(OALAudioSession);
 /**
  * (INTERNAL USE) Private methods for OALAudioSupport. 
  */
-@interface OALAudioSession (Private)
+@interface OALAudioSession ()
 
 /** (INTERNAL USE) Get an AudioSession property.
  *

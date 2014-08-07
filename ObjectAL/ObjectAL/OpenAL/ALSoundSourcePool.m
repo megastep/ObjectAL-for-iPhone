@@ -37,7 +37,7 @@
 /**
  * Private interface to SoundSourcePool.
  */
-@interface ALSoundSourcePool (Private)
+@interface ALSoundSourcePool ()
 
 /** Move a source to the head of the list.
  *

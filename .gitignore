@@ -1,4 +1,4 @@
-build/*
+build/
 KSCrash/build/*
 *.pbxuser
 !default.pbxuser
@@ -23,3 +23,5 @@ Thumbs.db
 doxygen.config
 Pods
 Podfile.lock
+*.swp
+*.lock

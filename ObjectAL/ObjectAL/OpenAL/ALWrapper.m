@@ -49,7 +49,7 @@
 /**
  * Private interface to ALWrapper.
  */
-@interface ALWrapper (Private)
+@interface ALWrapper ()
 
 /** Decode an OpenAL supplied NULL-separated string list into an NSArray.
  *

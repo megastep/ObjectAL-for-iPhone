@@ -199,7 +199,7 @@
 /**
  * (INTERNAL USE) Private interface to OALAudioTrack.
  */
-@interface OALAudioTrack (Private)
+@interface OALAudioTrack ()
 
 /** (INTERNAL USE) Called by SuspendHandler.
  */
