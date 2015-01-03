@@ -155,8 +155,7 @@
 				{
                     if([suspendStatusChangeTarget respondsToSelector:suspendStatusChangeSelector])
                     {
-                        id (*method)(id, SEL, bool)  = (id (*)(id, SEL, bool))[suspendStatusChangeTarget methodForSelector:suspendStatusChangeSelector];
-                        method(suspendStatusChangeTarget, suspendStatusChangeSelector, manualSuspendLock);
+                        objc_msgSend(suspendStatusChangeTarget, suspendStatusChangeSelector, manualSuspendLock);
                     }
 				}
 			}
