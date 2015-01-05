@@ -38,7 +38,7 @@
 /** \endcond */
 
 /** Slave object that is notified when this object suspends or unsuspends. WEAK reference */
-@property(nonatomic,readwrite,assign) id suspendStatusChangeTarget;
+@property(nonatomic,readwrite,as_weakprop) id suspendStatusChangeTarget;
 
 @end
 
@@ -151,13 +151,15 @@
 			manualSuspendLock = value;
 			if(!interruptLock)
 			{
-				if(nil != suspendStatusChangeTarget)
-				{
-                    if([suspendStatusChangeTarget respondsToSelector:suspendStatusChangeSelector])
+                id localSuspendStatusChangeTarget = suspendStatusChangeTarget; // Hold temporary strong reference
+                if(nil != localSuspendStatusChangeTarget)
+                {
+                    if([localSuspendStatusChangeTarget respondsToSelector:suspendStatusChangeSelector])
                     {
-                        objc_msgSend(suspendStatusChangeTarget, suspendStatusChangeSelector, manualSuspendLock);
+                        id (*method)(id, SEL, bool)  = (id (*)(id, SEL, bool))[localSuspendStatusChangeTarget methodForSelector:suspendStatusChangeSelector];
+                        method(localSuspendStatusChangeTarget, suspendStatusChangeSelector, manualSuspendLock);
                     }
-				}
+                }
 			}
 		}
 		
@@ -219,11 +221,12 @@
 			interruptLock = value;
 			if(!manualSuspendLock)
 			{
-				if(nil != suspendStatusChangeTarget)
+                id localSuspendStatusChangeTarget = suspendStatusChangeTarget;
+				if(nil != localSuspendStatusChangeTarget)
 				{
                     void (*suspendStatusChange)(id, SEL, bool);
-                    suspendStatusChange = (void (*)(id, SEL, bool))[suspendStatusChangeTarget methodForSelector:suspendStatusChangeSelector];
-                    suspendStatusChange(suspendStatusChangeTarget, suspendStatusChangeSelector, interruptLock);
+                    suspendStatusChange = (void (*)(id, SEL, bool))[localSuspendStatusChangeTarget methodForSelector:suspendStatusChangeSelector];
+                    suspendStatusChange(localSuspendStatusChangeTarget, suspendStatusChangeSelector, interruptLock);
 				}
 			}
 		}
