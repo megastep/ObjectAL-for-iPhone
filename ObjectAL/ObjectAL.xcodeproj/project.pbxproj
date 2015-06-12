@@ -640,7 +640,7 @@
 		CBBAA821171D05AA009B955F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Karl Stenerud";
 			};
 			buildConfigurationList = CBBAA824171D05AA009B955F /* Build configuration list for PBXProject "ObjectAL" */;
@@ -812,6 +812,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -944,6 +945,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "OSX/ObjectAL (OSX)-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stenerud.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ObjectAL;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -969,6 +971,7 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				INFOPLIST_FILE = "OSX/ObjectAL (OSX)-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.stenerud.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = ObjectAL;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
