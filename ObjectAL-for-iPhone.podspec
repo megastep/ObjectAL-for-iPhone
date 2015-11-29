@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'ObjectAL-for-iPhone'
-  s.version  = '2.5'
+  s.version  = '2.5.1'
   s.license  = { :type => 'MIT', :file => 'ObjectAL/LICENSE.ObjectAL.txt' }
   s.summary  = 'Mac and iOS Audio, minus the headache.'
   s.homepage = 'http://kstenerud.github.io/ObjectAL-for-iPhone/'
@@ -12,5 +12,4 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.6'
   s.requires_arc = false
   s.ios.frameworks = 'OpenAL', 'AudioToolbox', 'AVFoundation'
-  s.header_mappings_dir = 'ObjectAL'
 end
