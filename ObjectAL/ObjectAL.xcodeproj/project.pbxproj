@@ -13,7 +13,6 @@
 		CB5E9949171D1A58004CF421 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5E9948171D1A58004CF421 /* OpenAL.framework */; };
 		CBBAB314171D0B84009B955F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBAB313171D0B84009B955F /* Foundation.framework */; };
 		CBBAB33F171D0BC4009B955F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBBAB33E171D0BC4009B955F /* Cocoa.framework */; };
-		CBBAB349171D0BC4009B955F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CBBAB347171D0BC4009B955F /* InfoPlist.strings */; };
 		CBBAB394171D0C0F009B955F /* OALAction+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = CBBAB352171D0C0E009B955F /* OALAction+Private.h */; };
 		CBBAB395171D0C0F009B955F /* OALAction.h in Headers */ = {isa = PBXBuildFile; fileRef = CBBAB353171D0C0E009B955F /* OALAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBBAB396171D0C0F009B955F /* OALAction.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBAB354171D0C0E009B955F /* OALAction.m */; };
@@ -218,7 +217,6 @@
 		CBBAB342171D0BC4009B955F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		CBBAB343171D0BC4009B955F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CBBAB346171D0BC4009B955F /* ObjectAL (OSX)-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectAL (OSX)-Info.plist"; sourceTree = "<group>"; };
-		CBBAB348171D0BC4009B955F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CBBAB34A171D0BC4009B955F /* ObjectAL (OSX)-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectAL (OSX)-Prefix.pch"; sourceTree = "<group>"; };
 		CBBAB352171D0C0E009B955F /* OALAction+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OALAction+Private.h"; sourceTree = "<group>"; };
 		CBBAB353171D0C0E009B955F /* OALAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OALAction.h; sourceTree = "<group>"; };
@@ -392,7 +390,6 @@
 		CBBAB345171D0BC4009B955F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CBBAB347171D0BC4009B955F /* InfoPlist.strings */,
 				CBBAB346171D0BC4009B955F /* ObjectAL (OSX)-Info.plist */,
 				CBBAB34A171D0BC4009B955F /* ObjectAL (OSX)-Prefix.pch */,
 			);
@@ -667,7 +664,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBBAB349171D0BC4009B955F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -741,17 +737,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		CBBAB347171D0BC4009B955F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CBBAB348171D0BC4009B955F /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CB5E994B171DC145004CF421 /* Debug */ = {
